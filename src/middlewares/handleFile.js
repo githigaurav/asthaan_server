@@ -1,11 +1,10 @@
 import multer from "multer";
 import fs from "fs";
 import { promisify } from "util";
-import {filePath} from './../constant.js'
-
+import { filePath } from "./../constant.js";
+import ApiResponse from "../utils/apiResponse.js";
 const handleFile = async (req, res, next) => {
   try {
-
     //* if directory is not exists then create it otherwise skip this
     fs.existsSync(filePath) || fs.mkdirSync(filePath);
 
@@ -29,14 +28,17 @@ const handleFile = async (req, res, next) => {
     if (!!req.files.length) {
       next();
     } else {
-      res.status(200).json({ message: "File is required" });
+      return ApiResponse.failure([], "File is required", 400).send(res);
     }
+    
   } catch (error) {
+
     if (error.code === "LIMIT_UNEXPECTED_FILE") {
-      return res.status(400).json({ message: "Max 3 files allowed" });
+      return ApiResponse.failure([], "Max 3 files allowed", 400).send(res);
     }
 
     console.log(error);
+
   }
 };
 
