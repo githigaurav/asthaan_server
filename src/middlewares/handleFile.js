@@ -4,6 +4,7 @@ import { promisify } from "util";
 import { filePath } from "./../constant.js";
 import ApiResponse from "../utils/apiResponse.js";
 const handleFile = async (req, res, next) => {
+
   try {
     //* if directory is not  exists then create it otherwise skip this
     fs.existsSync(filePath) || fs.mkdirSync(filePath);
@@ -34,6 +35,7 @@ const handleFile = async (req, res, next) => {
   } catch (error) {
 
     if (error.code === "LIMIT_UNEXPECTED_FILE") {
+      console.log(req?.files)
       return ApiResponse.failure([], "Max 3 files allowed", 400).send(res);
     }
 
