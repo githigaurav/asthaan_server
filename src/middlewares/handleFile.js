@@ -5,7 +5,7 @@ import { filePath } from "./../constant.js";
 import ApiResponse from "../utils/apiResponse.js";
 const handleFile = async (req, res, next) => {
   try {
-    //* if directory is not exists then create it otherwise skip this
+    //* if directory is not  exists then create it otherwise skip this
     fs.existsSync(filePath) || fs.mkdirSync(filePath);
 
     //* Configure storage in order to save client side files at temp storage
@@ -30,7 +30,7 @@ const handleFile = async (req, res, next) => {
     } else {
       return ApiResponse.failure([], "File is required", 400).send(res);
     }
-    
+
   } catch (error) {
 
     if (error.code === "LIMIT_UNEXPECTED_FILE") {

@@ -13,6 +13,7 @@ user.post("/addproperty", handleFile, async (req, res) => {
 
   try {
     const response = await uploadToCloud(req, filePath);
+   console.log(response)
     if (response) {
       return res.status(200).json({ message: "Property added successfully" });
     }
