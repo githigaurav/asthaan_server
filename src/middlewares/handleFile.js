@@ -35,7 +35,6 @@ const handleFile = async (req, res, next) => {
   } catch (error) {
 
     if (error.code === "LIMIT_UNEXPECTED_FILE") {
-      console.log(req?.files)
       return ApiResponse.failure([], "Max 3 files allowed", 400).send(res);
     }
 
